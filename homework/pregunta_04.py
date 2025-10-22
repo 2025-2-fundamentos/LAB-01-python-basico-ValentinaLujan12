@@ -26,3 +26,20 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    with open("files/input/data.csv", "r") as archivo:
+        fechas = [linea.strip().split("\t")[2] for linea in archivo]
+
+    registros = {}
+
+    for fecha in fechas:
+        partes = fecha.split("-")
+        if len(partes) >= 2:
+            mes = partes[1]
+            if mes not in registros:
+                registros[mes] = 1
+            else:
+                registros[mes] += 1
+
+    registros = sorted(list(registros.items()))
+
+    return registros

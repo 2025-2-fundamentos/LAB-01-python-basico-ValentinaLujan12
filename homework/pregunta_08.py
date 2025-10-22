@@ -27,3 +27,21 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    with open("files/input/data.csv", "r") as archivo:
+        datos = [linea.strip().split("\t")[:2] for linea in archivo]
+
+    asociaciones = {}
+
+    for letra, numero in datos:
+        numero = int(numero)
+        if numero not in asociaciones:
+            asociaciones[numero] = [letra]
+        else:
+            asociaciones[numero].append(letra)
+
+    resultado = []
+    for numero in sorted(asociaciones.keys()):
+        letras_unicas = sorted(set(asociaciones[numero]))
+        resultado.append((numero, letras_unicas))
+
+    return resultado

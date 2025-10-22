@@ -20,3 +20,18 @@ def pregunta_10():
 
 
     """
+    with open("files/input/data.csv", "r") as archivo:
+        resultado = []
+        for linea in archivo:
+            columnas = linea.strip().split("\t")
+
+            letra = columnas[0]
+            col4 = columnas[3]
+            col5 = columnas[4]
+
+            cant_col4 = len(col4.split(","))
+            cant_col5 = len(col5.split(","))
+
+            resultado.append((letra, cant_col4, cant_col5))
+
+    return resultado

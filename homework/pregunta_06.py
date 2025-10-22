@@ -26,3 +26,25 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    with open("files/input/data.csv", "r") as archivo:
+        columnas = [linea.strip().split("\t")[4] for linea in archivo]
+
+    valores_por_clave = {}
+
+    for cadena in columnas:
+        pares = cadena.split(",")
+        for par in pares:
+            clave, valor = par.split(":")
+            valor = int(valor)
+
+            if clave not in valores_por_clave:
+                valores_por_clave[clave] = [valor]
+            else:
+                valores_por_clave[clave].append(valor)
+
+    resultado = []
+    for clave in sorted(valores_por_clave.keys()):
+        valores = valores_por_clave[clave]
+        resultado.append((clave, min(valores), max(valores)))
+
+    return resultado
